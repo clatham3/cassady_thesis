@@ -26,7 +26,7 @@ explore: aircraft_models {}
 explore: airports {
   join: bq_logrecno_bg_map{
     relationship: many_to_many
-    sql_on: ${airports.state} = ${bq_logrecno_bg_map.state};;
+    sql_on: ${airports.county} = ${bq_logrecno_bg_map.county};;
   }
 }
 
