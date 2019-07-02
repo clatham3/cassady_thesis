@@ -23,7 +23,12 @@ explore: aircraft {}
 
 explore: aircraft_models {}
 
-explore: airports {}
+explore: airports {
+  join: bq_logrecno_bg_map{
+    relationship: many_to_many
+    sql_on: ${airports.state} = ${bq_logrecno_bg_map.state};;
+  }
+}
 
 explore: bruce_mv {}
 
