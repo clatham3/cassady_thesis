@@ -39,10 +39,6 @@ explore: cal454 {}
 explore: carriers {}
 
 explore: flights {
-  join: carriers {
-    relationship: one_to_one
-    sql_on: ${flights.carrier} = ${carriers.code} ;;
-  }
   join: airports {
     relationship: one_to_many
     sql_on: ${airports.code} = ${flights.origin} ;;
