@@ -32,9 +32,9 @@ explore: airports {
     relationship: one_to_one
     sql_on: ${bq_zipcode_facts.zipcode} = ${bq_zipcode_station.zipcode} ;;
   }
-  join: bq_stations {
+  join: bq_gsod {
     relationship: one_to_one
-    sql_on: ${bq_zipcode_station.nearest_station_id} = ${bq_stations.station_id} ;;
+    sql_on: ${bq_zipcode_station.nearest_station_id} = ${bq_gsod.station_id} ;;
   }
 }
 
