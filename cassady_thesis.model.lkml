@@ -2,7 +2,7 @@ connection: "lookerdata_publicdata_standard_sql"
 
 # include all the views
 include: "*.view"
-include: "//cassady_thesis_demographics/*.view"
+include: "//cassady_thesis_weather/*.view"
 
 explore: accidents {
   join: aircraft_models {
@@ -24,9 +24,17 @@ explore: aircraft {}
 explore: aircraft_models {}
 
 explore: airports {
-  join: bq_logrecno_bg_map{
-    relationship: many_to_many
-    sql_on: ${airports.county} = ${bq_logrecno_bg_map.county_name};;
+  join: bq_zipcode_facts{
+    relationship: one_to_one
+    sql_on: ${airports.city} = ${bq_zipcode_facts.city};;
+  }
+  join: bq_zipcode_station {
+    relationship: one_to_one
+    sql_on: ${bq_zipcode_facts.zipcode} = ${bq_zipcode_station.zipcode} ;;
+  }
+  join: bq_stations {
+    relationship: one_to_one
+    sql_on: ${bq_zipcode_station.nearest_station_id} = ${bq_stations.station_id} ;;
   }
 }
 
@@ -40,8 +48,12 @@ explore: carriers {}
 
 explore: flights {
   join: airports {
-    relationship: one_to_many
+    relationship: many_to_one
     sql_on: ${airports.code} = ${flights.origin} ;;
+  }
+  join: carriers {
+    relationship: many_to_one
+    sql_on: ${carriers.code} = ${flights.carrier} ;;
   }
 }
 

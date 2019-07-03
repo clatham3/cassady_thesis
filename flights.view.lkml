@@ -104,3 +104,49 @@ view: flights {
     drill_fields: []
   }
 }
+
+view: flights_cancelled_by_airport_and_carrier {
+  derived_table: {
+    explore_source: flights {
+      column: full_name { field: airports.full_name }
+      column: cancelled {}
+      column: count {}
+      filters: {
+        field: flights.cancelled
+        value: "N"
+      }
+      filters: {
+        field: airports.full_name
+        value: "-EMPTY"
+      }
+    }
+  }
+  dimension: full_name {}
+  dimension: cancelled {}
+  dimension: count {
+    type: number
+  }
+}
+
+view: flights_not_cancelled_by_airport_and_carrier {
+  derived_table: {
+    explore_source: flights {
+      column: full_name { field: airports.full_name }
+      column: cancelled {}
+      column: count {}
+      filters: {
+        field: flights.cancelled
+        value: "Y"
+      }
+      filters: {
+        field: airports.full_name
+        value: "-EMPTY"
+      }
+    }
+  }
+  dimension: full_name {}
+  dimension: cancelled {}
+  dimension: count {
+    type: number
+  }
+}
