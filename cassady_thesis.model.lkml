@@ -2,7 +2,7 @@ connection: "lookerdata_publicdata_standard_sql"
 
 # include all the views
 include: "*.view"
-include: "//cassady_thesis_weather/*.view"
+include: "//cassady_thesis_demographics/*.view"
 
 explore: accidents {
   join: aircraft_models {
@@ -23,21 +23,7 @@ explore: aircraft {}
 
 explore: aircraft_models {}
 
-explore: airports {
-  join: bq_zipcode_facts{
-    relationship: one_to_one
-    sql_on: ${airports.city} = ${bq_zipcode_facts.city};;
-  }
-  join: bq_zipcode_station {
-    relationship: one_to_one
-    sql_on: ${bq_zipcode_facts.zipcode} = ${bq_zipcode_station.zipcode} ;;
-  }
-  join: bq_gsod {
-    relationship: one_to_one
-    sql_on: ${bq_zipcode_station.nearest_station_id} = ${bq_gsod.station_id} AND
-            ${bq_zipcode_station.year} = ${bq_gsod.year};;
-  }
-}
+explore: airports {}
 
 explore: bruce_mv {}
 

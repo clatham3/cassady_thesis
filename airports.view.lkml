@@ -42,6 +42,11 @@ view: airports {
     sql: ${TABLE}.city ;;
   }
 
+  dimension: city_lowercase {
+    type: string
+    sql: lower(${city}) ;;
+  }
+
   dimension: cntl_twr {
     type: string
     sql: ${TABLE}.cntl_twr ;;
