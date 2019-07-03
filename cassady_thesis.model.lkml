@@ -34,7 +34,8 @@ explore: airports {
   }
   join: bq_gsod {
     relationship: one_to_one
-    sql_on: ${bq_zipcode_station.nearest_station_id} = ${bq_gsod.station_id} ;;
+    sql_on: ${bq_zipcode_station.nearest_station_id} = ${bq_gsod.station_id} AND
+            ${bq_zipcode_station.year} = ${bq_gsod.year};;
   }
 }
 
