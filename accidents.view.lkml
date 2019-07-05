@@ -109,7 +109,7 @@ view: accidents {
 
   dimension: make {
     type: string
-    sql: ${TABLE}.make ;;
+    sql: upper(${TABLE}.make) ;;
   }
 
   dimension: model {
