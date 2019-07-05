@@ -34,7 +34,7 @@ view: accidents {
 
   dimension: airport_name {
     type: string
-    sql: ${TABLE}.airport_name ;;
+    sql: upper(${TABLE}.airport_name) ;;
   }
 
   dimension: amateur_built {
