@@ -42,11 +42,6 @@ view: airports {
     sql: ${TABLE}.city ;;
   }
 
-  dimension: city_lowercase {
-    type: string
-    sql: lower(${city}) ;;
-  }
-
   dimension: cntl_twr {
     type: string
     sql: ${TABLE}.cntl_twr ;;
@@ -115,6 +110,12 @@ view: airports {
   dimension: longitude {
     type: number
     sql: ${TABLE}.longitude ;;
+  }
+
+  dimension: block_group_centroid {
+    type: location
+    sql_latitude: ${latitude} ;;
+    sql_longitude: ${longitude} ;;
   }
 
   dimension: major {
