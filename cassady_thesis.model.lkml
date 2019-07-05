@@ -26,8 +26,7 @@ explore: aircraft_models {}
 explore: airports {
   join: bq_logrecno_bg_map {
     relationship: many_to_many
-    sql_on: ${airports.latitude} = ${bq_logrecno_bg_map.formatted_lat} AND
-            ${airports.longitude} = ${bq_logrecno_bg_map.formatted_lon};;
+    sql_on: ${airports.state} = ${bq_logrecno_bg_map.state};;
   }
 }
 
