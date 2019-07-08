@@ -110,7 +110,7 @@ view: flights {
       field: cancelled
       value: "N"
     }
-    drill_fields: [carrier, Dep_Delayed, Dep_Not_Delayed]
+    drill_fields: [carriers.name, Dep_Delayed, Dep_Not_Delayed]
   }
   measure: Cancelled {
     type: count
@@ -118,7 +118,7 @@ view: flights {
       field: cancelled
       value: "Y"
     }
-    drill_fields: [carrier, dep_date]
+    drill_fields: [carriers.name, origin, destination, dep_date]
   }
 
   measure: Dep_Delayed {
