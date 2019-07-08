@@ -59,4 +59,4 @@ explore: flights {
 
 explore: flights_by_day {}
 
-explore: flights_dk {}
+explore: Cancelled_Flights {}

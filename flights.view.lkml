@@ -118,7 +118,16 @@ view: flights {
       field: cancelled
       value: "Y"
     }
-    drill_fields: [carriers.name, origin, destination, dep_date]
+    drill_fields: [carriers.name, count, arr_quarter]
+  }
+
+  measure: Cancelled_Carrier {
+    type: count
+    filters: {
+      field:  cancelled
+      value: "Y"
+    }
+    drill_fields: [airports.full_name, count, arr_quarter]
   }
 
   measure: Dep_Delayed {
@@ -150,4 +159,22 @@ view: flights {
       value: "<= 0"
     }
   }
+}
+
+view: Cancelled_Flights {
+  derived_table: {
+    sql: SELECT
+           airports.full_name  AS airports_name,
+           FORMAT_TIMESTAMP('%Y-%m', TIMESTAMP_TRUNC(CAST(flights.arr_time  AS TIMESTAMP), QUARTER)) AS arrival_quarter,
+           COUNT(CASE WHEN (flights.cancelled = 'Y') THEN 1 ELSE NULL END) AS flights_cancelled
+         FROM faa.flights  AS flights
+        LEFT JOIN faa.airports  AS airports ON airports.code = flights.origin
+        GROUP BY 2,1
+        ORDER BY 2 DESC
+        LIMIT 500;;
+
+  }
+  dimension: arrival_quarter {}
+  dimension: airports_name {}
+  dimension: flights_cancelled {}
 }
