@@ -103,4 +103,51 @@ view: flights {
     type: count
     drill_fields: []
   }
+
+  measure: Not_Cancelled {
+    type: count
+    filters: {
+      field: cancelled
+      value: "N"
+    }
+    drill_fields: [carrier, Dep_Delayed, Dep_Not_Delayed]
+  }
+  measure: Cancelled {
+    type: count
+    filters: {
+      field: cancelled
+      value: "Y"
+    }
+    drill_fields: [carrier, dep_date]
+  }
+
+  measure: Dep_Delayed {
+    type: count
+    filters: {
+      field: dep_delay
+      value: "> 0"
+    }
+  }
+  measure: Dep_Not_Delayed {
+    type: count
+    filters: {
+      field: dep_delay
+      value: "<= 0"
+    }
+  }
+
+  measure: Arr_Delayed {
+    type: count
+    filters: {
+      field: arr_delay
+      value: "> 0"
+    }
+  }
+  measure: Arr_Not_Delayed {
+    type: count
+    filters: {
+      field: arr_delay
+      value: "<= 0"
+    }
+  }
 }
