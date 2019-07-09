@@ -9,6 +9,10 @@ view: carriers {
   dimension: name {
     type: string
     sql: ${TABLE}.name ;;
+    link: {
+      label: "Airport Dashboard"
+      url: "/dashboards/332?Carrier%20Name={{ value }}"
+    }
   }
 
   dimension: nickname {

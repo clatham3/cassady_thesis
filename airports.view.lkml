@@ -95,6 +95,10 @@ view: airports {
   dimension: full_name {
     type: string
     sql: ${TABLE}.full_name ;;
+    link: {
+      label: "Carrier Dashboards"
+      url: "/dashboards/344?Airport%20Name={{ value }}"
+    }
   }
 
   dimension: joint_use {
