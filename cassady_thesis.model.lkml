@@ -5,26 +5,14 @@ include: "*.view"
 include: "//cassady_thesis_demographics/*.view"
 
 explore: accidents {
-  join: aircraft_models {
+  join: carriers {
     relationship: many_to_one
-    sql_on: ${accidents.make} = ${aircraft_models.manufacturer} ;;
+    sql_on: ${accidents.air_carrier} = ${carriers.name} ;;
   }
-#   join: aircraft {
-#     relationship: many_to_one
-#     sql_on: ${aircraft_models.aircraft_model_code} = ${aircraft.aircraft_model_code};;
-#   }
-#   join: carriers {
-#     relationship: many_to_one
-#     sql_on: ${accidents.air_carrier} = ${carriers.code} ;;
-#   }
-#   join: airports {
-#     relationship: many_to_one
-#     sql_on: ${airports.code} = ${accidents.airport_code} ;;
-#   }
-#   join: flights {
-#     relationship: many_to_one
-#     sql_on: ${flights.origin} = ${accidents.airport_code} ;;
-#   }
+  join: airports {
+    relationship: many_to_one
+    sql_on: ${airports.code} = ${accidents.airport_code} ;;
+  }
 }
 
 explore: aircraft {}

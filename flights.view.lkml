@@ -112,7 +112,7 @@ view: flights {
     }
     drill_fields: [carriers.name, Dep_Delayed, Dep_Not_Delayed]
   }
-  measure: Cancelled {
+  measure: Flights_Cancelled {
     type: count
     filters: {
       field: cancelled
@@ -130,12 +130,22 @@ view: flights {
     drill_fields: [airports.full_name, count, arr_quarter]
   }
 
+  measure: Not_Cancelled_Carrier {
+    type:  count
+    filters: {
+      field: cancelled
+      value: "N"
+    }
+    drill_fields: [airports.full_name, Dep_Delayed, Dep_Not_Delayed]
+  }
+
   measure: Dep_Delayed {
     type: count
     filters: {
       field: dep_delay
       value: "> 0"
     }
+    drill_fields: [carriers.name, dep_quarter, count]
   }
   measure: Dep_Not_Delayed {
     type: count
@@ -143,6 +153,7 @@ view: flights {
       field: dep_delay
       value: "<= 0"
     }
+    drill_fields: [carriers.name, dep_quarter, count]
   }
 
   measure: Arr_Delayed {
@@ -151,6 +162,7 @@ view: flights {
       field: arr_delay
       value: "> 0"
     }
+    drill_fields: [diverted, count, airports.full_name]
   }
   measure: Arr_Not_Delayed {
     type: count
@@ -166,7 +178,8 @@ view: Cancelled_Flights {
     sql: SELECT
            airports.full_name  AS airports_name,
            FORMAT_TIMESTAMP('%Y-%m', TIMESTAMP_TRUNC(CAST(flights.arr_time  AS TIMESTAMP), QUARTER)) AS arrival_quarter,
-           COUNT(CASE WHEN (flights.cancelled = 'Y') THEN 1 ELSE NULL END) AS flights_cancelled
+           COUNT(CASE WHEN (flights.cancelled = 'Y') THEN 1 ELSE NULL END) AS cancelled_flights,
+           COUNT(flights.flight_num) AS total_flights
          FROM faa.flights  AS flights
         LEFT JOIN faa.airports  AS airports ON airports.code = flights.origin
         GROUP BY 2,1
@@ -176,5 +189,10 @@ view: Cancelled_Flights {
   }
   dimension: arrival_quarter {}
   dimension: airports_name {}
-  dimension: flights_cancelled {}
+  dimension: cancelled_flights {
+    type: number
+  }
+  dimension: total_flights {
+    type: number
+  }
 }
