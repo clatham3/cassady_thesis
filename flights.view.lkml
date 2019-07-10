@@ -82,6 +82,7 @@ view: flights {
   dimension: origin {
     type: string
     sql: ${TABLE}.origin ;;
+    drill_fields: [dep_delay, carrier]
   }
 
   dimension: tail_num {
@@ -170,5 +171,15 @@ view: flights {
       field: arr_delay
       value: "<= 0"
     }
+  }
+
+  measure: Average_Departure_Delay{
+    type: average
+    sql: ${flights.dep_delay} ;;
+  }
+
+  measure: Average_Arrival_Delay{
+    type: average
+    sql: ${flights.arr_delay} ;;
   }
 }
