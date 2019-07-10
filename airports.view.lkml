@@ -116,7 +116,7 @@ view: airports {
     sql: ${TABLE}.longitude ;;
   }
 
-  dimension: block_group_centroid {
+  dimension: location {
     type: location
     sql_latitude: ${latitude} ;;
     sql_longitude: ${longitude} ;;

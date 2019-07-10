@@ -172,27 +172,3 @@ view: flights {
     }
   }
 }
-
-view: Cancelled_Flights {
-  derived_table: {
-    sql: SELECT
-           airports.full_name  AS airports_name,
-           FORMAT_TIMESTAMP('%Y-%m', TIMESTAMP_TRUNC(CAST(flights.arr_time  AS TIMESTAMP), QUARTER)) AS arrival_quarter,
-           COUNT(CASE WHEN (flights.cancelled = 'Y') THEN 1 ELSE NULL END) AS cancelled_flights,
-           COUNT(flights.flight_num) AS total_flights
-         FROM faa.flights  AS flights
-        LEFT JOIN faa.airports  AS airports ON airports.code = flights.origin
-        GROUP BY 2,1
-        ORDER BY 2 DESC
-        LIMIT 500;;
-
-  }
-  dimension: arrival_quarter {}
-  dimension: airports_name {}
-  dimension: cancelled_flights {
-    type: number
-  }
-  dimension: total_flights {
-    type: number
-  }
-}

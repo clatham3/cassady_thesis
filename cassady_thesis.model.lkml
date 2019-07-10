@@ -19,12 +19,7 @@ explore: aircraft {}
 
 explore: aircraft_models {}
 
-explore: airports {
-  join: bq_logrecno_bg_map {
-    relationship: many_to_many
-    sql_on: ${airports.state} = ${bq_logrecno_bg_map.stusab};;
-  }
-}
+explore: airports {}
 
 explore: bruce_mv {}
 
@@ -46,5 +41,3 @@ explore: flights {
 }
 
 explore: flights_by_day {}
-
-explore: Cancelled_Flights {}
