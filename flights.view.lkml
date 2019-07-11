@@ -1,6 +1,19 @@
 view: flights {
   sql_table_name: faa.flights ;;
 
+  filter: carrier_select {
+    suggest_dimension: flights.carrier
+  }
+
+  dimension: carrier_comparitor {
+    type: string
+    sql:
+    CASE
+      WHEN {% condition carrier_select %} ${carrier_select} {% endcondition %}
+        THEN ${carrier_select}
+      ELSE 'Rest of Population'
+    END ;;
+  }
   dimension: arr_delay {
     type: number
     sql: ${TABLE}.arr_delay ;;
