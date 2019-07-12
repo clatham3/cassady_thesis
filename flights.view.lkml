@@ -2,16 +2,16 @@ view: flights {
   sql_table_name: faa.flights ;;
 
   filter: carrier_select {
-    suggest_dimension: flights.carrier
+    suggest_dimension: carriers.name
   }
 
   dimension: carrier_comparitor {
     type: string
     sql:
     CASE
-      WHEN {% condition carrier_select %} ${carrier_select} {% endcondition %}
-        THEN ${carrier_select}
-      ELSE 'Rest of Population'
+      WHEN {% condition carrier_select %} carriers.name {% endcondition %}
+        THEN ${carriers.name}
+      ELSE 'Rest of Carriers'
     END ;;
   }
   dimension: arr_delay {
@@ -65,6 +65,10 @@ view: flights {
   dimension: destination {
     type: string
     sql: ${TABLE}.destination ;;
+    link: {
+      label: "Carrier Dashboard"
+      url: "/dashboards/344?Destination%20Airport={{ value }}"
+    }
   }
 
   dimension: distance {
@@ -95,7 +99,10 @@ view: flights {
   dimension: origin {
     type: string
     sql: ${TABLE}.origin ;;
-    drill_fields: [dep_delay, carrier]
+    link: {
+      label: "Carrier Dashboard"
+      url: "/dashboards/344?Origin%20Airport={{ value }}"
+    }
   }
 
   dimension: tail_num {
