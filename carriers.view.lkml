@@ -10,8 +10,8 @@ view: carriers {
     type: string
     sql: ${TABLE}.name ;;
     link: {
-      label: "Airport Dashboard"
-      url: "/dashboards/332?Carrier%20Name={{ value }}"
+      label: "Explore {{ value }}"
+      url: "/dashboards/344?Carrier%20Name={{ value }}"
     }
   }
 
