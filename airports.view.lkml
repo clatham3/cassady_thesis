@@ -96,7 +96,7 @@ view: airports {
     type: string
     sql: ${TABLE}.full_name ;;
     link: {
-      label: "Carrier Dashboards"
+      label: "Explore {{ value }}"
       url: "/dashboards/344?Airport%20Name={{ value }}"
     }
   }

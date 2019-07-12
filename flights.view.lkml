@@ -96,7 +96,7 @@ view: flights {
     type: string
     sql: ${TABLE}.origin ;;
     link: {
-      label: "Carrier Dashboard"
+      label: "Explore {{ value }}"
       url: "/dashboards/344?Origin%20Airport={{ value }}"
     }
   }
