@@ -65,10 +65,6 @@ view: flights {
   dimension: destination {
     type: string
     sql: ${TABLE}.destination ;;
-    link: {
-      label: "Carrier Dashboard"
-      url: "/dashboards/344?Destination%20Airport={{ value }}"
-    }
   }
 
   dimension: distance {
