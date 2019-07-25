@@ -97,7 +97,7 @@ view: airports {
     sql: ${TABLE}.full_name ;;
     link: {
       label: "Explore {{ value }}"
-      url: "/dashboards/344?Airport%20Name={{ value }}"
+      url: "/dashboards/344?Airport%20Name={{ value }}&Origin%20State={{ _filters['airports.state'] | url_encode }}&Carrier%20Name={{ _filters['carriers.name'] | url_encode }}"
     }
   }
 
