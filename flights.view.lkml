@@ -97,7 +97,7 @@ view: flights {
     sql: ${TABLE}.origin ;;
     link: {
       label: "Explore {{ value }}"
-      url: "/dashboards/344?Origin%20Airport={{ value }}&f[flights.origin]={{ _filters[flights.origin] }}&f[airport.state]={{ _filters[airport.state] }}"
+      url: "/dashboards/344?Origin%20Airport={{ value }}&Origin%20State={{ _filters['airports.state'] | url_encode }}&Carrier%20Name={{ _filters['carriers.name'] | url_encode }}"
     }
   }
 
